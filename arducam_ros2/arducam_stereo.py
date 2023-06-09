@@ -128,7 +128,7 @@ class ArduCamNode(Node):
         self._left_cam_info_msg.p = left_cam_data['projection_matrix']['data']
 
         # self.camera_info_publisher.publish(camera_info_msg)
-        self.get_logger().info('Loaded left camera info from %s', self._left_cam_info_file)
+        self.get_logger().info('Loaded left camera info from {}'.format(self._left_cam_info_file))
 
         self._right_cam_info_msg.width = right_cam_data['image_width']
         self._right_cam_info_msg.height = right_cam_data['image_height']
@@ -138,7 +138,7 @@ class ArduCamNode(Node):
         self._right_cam_info_msg.r = right_cam_data['rectification_matrix']['data']
         self._right_cam_info_msg.p = right_cam_data['projection_matrix']['data']
 
-        self.get_logger().info('Loaded right camera info from %s', self._right_cam_info_file)
+        self.get_logger().info('Loaded right camera info from {}'.format(self._right_cam_info_file))
 
 
     def resize(self, frame, dst_width):
