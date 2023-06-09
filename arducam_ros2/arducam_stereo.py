@@ -22,7 +22,7 @@ import array
 import fcntl
 import os
 import argparse
-from utils import ArducamUtils
+from .utils import ArducamUtils
 
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, CameraInfo
