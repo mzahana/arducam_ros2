@@ -133,10 +133,10 @@ class ArduCamNode(Node):
         self._right_cam_info_msg.width = right_cam_data['image_width']
         self._right_cam_info_msg.height = right_cam_data['image_height']
         self._right_cam_info_msg.distortion_model = right_cam_data['distortion_model']
-        self._right_cam_info_msg.K = right_cam_data['camera_matrix']['data']
-        self._right_cam_info_msg.D = right_cam_data['distortion_coefficients']['data']
-        self._right_cam_info_msg.R = right_cam_data['rectification_matrix']['data']
-        self._right_cam_info_msg.P = right_cam_data['projection_matrix']['data']
+        self._right_cam_info_msg.k = right_cam_data['camera_matrix']['data']
+        self._right_cam_info_msg.d = right_cam_data['distortion_coefficients']['data']
+        self._right_cam_info_msg.r = right_cam_data['rectification_matrix']['data']
+        self._right_cam_info_msg.p = right_cam_data['projection_matrix']['data']
 
         self.get_logger().info('Loaded right camera info from %s', self._right_cam_info_file)
 
