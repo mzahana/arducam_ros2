@@ -110,6 +110,7 @@ class ArduCamNode(Node):
         # turn off RGB conversion
         if self._arducam_utils.convert2rgb == 0:
             self._cap.set(cv2.CAP_PROP_CONVERT_RGB, self._arducam_utils.convert2rgb)
+            self.get_logger().info("[ArduCamNode::setDevice] RGB conversion is turned OFF")
 
         # set width
         try:
