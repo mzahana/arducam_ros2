@@ -72,7 +72,7 @@ class ArduCamNode(Node):
         # set height
         self._cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self._height)
 
-        self._arducam_utils = ArducamUtils(device)
+        self._arducam_utils = ArducamUtils(self._device)
 
         self.show_info(self._arducam_utils)
 
@@ -80,6 +80,11 @@ class ArduCamNode(Node):
         if self._arducam_utils.convert2rgb == 0:
             self._cap.set(cv2.CAP_PROP_CONVERT_RGB, self._arducam_utils.convert2rgb)
         
+        
+        # Load camera info from YAML files
+        # If failed, camInfo msgs will not be published
+        self.load_camera_info()
+
         # Publishers
         # CamInfo
         self._left_cam_info_pub = self.create_publisher(CameraInfo, 'stereo/left/camera_info', 10)
@@ -89,10 +94,10 @@ class ArduCamNode(Node):
         self._right_img_pub = self.create_publisher(Image, 'stereo/right/image_raw', 10)
 
         # TODO We need to create a timer for the run() function
-        fps = 0.01  # seconds
+        fps = 0.01  # seconds. WARNING. this is limited by the actual camera FPS
         self._cam_timer = self.create_timer(fps, self.run)
 
-        self.load_camera_info()
+        
 
 
     def load_camera_info(self):
@@ -143,7 +148,7 @@ class ArduCamNode(Node):
         return cv2.resize(frame, (int(scale * width), int(scale * height)))
 
     def run(self):
-        ret, frame = cap.read()
+        ret, frame = self._cap.read()
         if self._arducam_utils.convert2rgb == 0:
             w = self._cap.get(cv2.CAP_PROP_FRAME_WIDTH)
             h = self._cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
