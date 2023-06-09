@@ -82,6 +82,7 @@ def generate_launch_description():
     ld.add_action(namespace_arg)
     ld.add_action(device_arg)
     ld.add_action(width_arg)
+    ld.add_action(height_arg)
     ld.add_action(frame_id_arg)
     ld.add_action(pixelformat_arg)
     ld.add_action(left_cam_info_file_arg)
