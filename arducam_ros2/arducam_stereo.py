@@ -67,18 +67,10 @@ class ArduCamNode(Node):
         
         # open camera
         self._cap = cv2.VideoCapture(self._device, cv2.CAP_V4L2)
-        # set width
-        self._cap.set(cv2.CAP_PROP_FRAME_WIDTH, self._width)
-        # set height
-        self._cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self._height)
-
-        self._arducam_utils = ArducamUtils(self._device)
-
-        self.show_info(self._arducam_utils)
-
-        # turn off RGB conversion
-        if self._arducam_utils.convert2rgb == 0:
-            self._cap.set(cv2.CAP_PROP_CONVERT_RGB, self._arducam_utils.convert2rgb)
+        
+        # Set device configs
+        if not self.setDevice():
+            exit(1)
         
         
         # Load camera info from YAML files
@@ -100,6 +92,41 @@ class ArduCamNode(Node):
         
 
 
+    def setDevice(self):        
+        try:
+            # set pixel format
+            if not self._cap.set(cv2.CAP_PROP_FOURCC, self.pixelformat(self._pixelformat)):
+                self.get_logger().error("[ArduCamNode::setDevice] Failed to set pixelformat {}".format(self._pixelformat))
+                return False
+        except Exception as e:
+            self.get_logger().error("[ArduCamNode::setDevice] Failed to set height {}".format(e))
+            return False
+        
+
+        self._arducam_utils = ArducamUtils(self._device)
+
+        self.show_info(self._arducam_utils)
+
+        # turn off RGB conversion
+        if self._arducam_utils.convert2rgb == 0:
+            self._cap.set(cv2.CAP_PROP_CONVERT_RGB, self._arducam_utils.convert2rgb)
+
+        # set width
+        try:
+            self._cap.set(cv2.CAP_PROP_FRAME_WIDTH, self._width)
+        except Exception as e:
+            self.get_logger().error("[ArduCamNode::setDevice] Failed to set width {}".format(e))
+            return False
+        
+        # set height
+        try:
+            self._cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self._height)
+        except Exception as e:
+            self.get_logger().error("[ArduCamNode::setDevice] Failed to set height {}".format(e))
+            return False
+        
+        return True
+    
     def load_camera_info(self):
         try:
 
