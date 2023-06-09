@@ -186,7 +186,7 @@ class ArduCamNode(Node):
             self._left_cam_info_msg.header.frame_id = self._frame_id
             self._right_cam_info_msg.header.frame_id = self._frame_id
             self._left_cam_info_pub.publish(self._left_cam_info_msg)
-            self._right_cam_info_pub.publish(self._righ)
+            self._right_cam_info_pub.publish(self._right_cam_info_msg)
             
 
 
