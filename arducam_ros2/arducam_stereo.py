@@ -122,10 +122,10 @@ class ArduCamNode(Node):
         self._left_cam_info_msg.width = left_cam_data['image_width']
         self._left_cam_info_msg.height = left_cam_data['image_height']
         self._left_cam_info_msg.distortion_model = left_cam_data['distortion_model']
-        self._left_cam_info_msg.K = left_cam_data['camera_matrix']['data']
-        self._left_cam_info_msg.D = left_cam_data['distortion_coefficients']['data']
-        self._left_cam_info_msg.R = left_cam_data['rectification_matrix']['data']
-        self._left_cam_info_msg.P = left_cam_data['projection_matrix']['data']
+        self._left_cam_info_msg.k = left_cam_data['camera_matrix']['data']
+        self._left_cam_info_msg.d = left_cam_data['distortion_coefficients']['data']
+        self._left_cam_info_msg.r = left_cam_data['rectification_matrix']['data']
+        self._left_cam_info_msg.p = left_cam_data['projection_matrix']['data']
 
         # self.camera_info_publisher.publish(camera_info_msg)
         self.get_logger().info('Loaded left camera info from %s', self._left_cam_info_file)
