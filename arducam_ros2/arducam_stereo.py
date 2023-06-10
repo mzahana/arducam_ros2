@@ -56,7 +56,7 @@ class ArduCamNode(Node):
 
         # Set to True if you use monochrome image sensors. Set if RGB
         self.declare_parameter('is_grey', True)
-        self._is_grey = self.get_parameter('is_grey').get_parameter_value().string_value
+        self._is_grey = self.get_parameter('is_grey').get_parameter_value().bool_value
         
 
         # flags to publish cam info if loaded
