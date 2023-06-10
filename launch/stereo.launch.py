@@ -43,6 +43,12 @@ def generate_launch_description():
         default_value='GREY'
     )
 
+    is_grey = LaunchConfiguration('is_grey')
+    is_grey_arg = DeclareLaunchArgument(
+        'is_grey',
+        default_value='True'
+    )
+
     l_file_name = 'left_cam_info.yaml'
     package_share_directory = get_package_share_directory('arducam_ros2')
     l_file_path = os.path.join(package_share_directory, l_file_name)
@@ -73,7 +79,8 @@ def generate_launch_description():
                         {'height': height},
                         {'pixelformat': pixelformat},
                         {'left_cam_info_file': left_cam_info_file},
-                        {'right_cam_info_file': right_cam_info_file}
+                        {'right_cam_info_file': right_cam_info_file},
+                        {'is_grey': is_grey}
                     ],
     )
 
@@ -85,6 +92,7 @@ def generate_launch_description():
     ld.add_action(height_arg)
     ld.add_action(frame_id_arg)
     ld.add_action(pixelformat_arg)
+    ld.add_action(is_grey_arg)
     ld.add_action(left_cam_info_file_arg)
     ld.add_action(right_cam_info_file_arg)
     ld.add_action(stereo_node)

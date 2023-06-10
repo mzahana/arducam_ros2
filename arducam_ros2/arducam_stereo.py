@@ -54,6 +54,9 @@ class ArduCamNode(Node):
         self.declare_parameter('frame_id', 'cam0')
         self._frame_id = self.get_parameter('frame_id').get_parameter_value().string_value
 
+        # Set to True if you use monochrome image sensors. Set if RGB
+        self.declare_parameter('is_grey', True)
+        self._is_grey = self.get_parameter('is_grey').get_parameter_value().string_value
         
 
         # flags to publish cam info if loaded
@@ -183,6 +186,9 @@ class ArduCamNode(Node):
             frame = frame.reshape(int(h), int(w))
 
         frame = self._arducam_utils.convert(frame)
+
+        if self._is_grey:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         encoding = "bgr8" if len(frame.shape) == 3 and frame.shape[2] >= 3 else "mono8"
 
