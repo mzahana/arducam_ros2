@@ -51,5 +51,5 @@ At the time of writing this package (June 2023), ROS 2 `humble` does not run dir
 * Reference: [tutorial](https://navigation.ros.org/tutorials/docs/camera_calibration.html)
 * [Checker board generator](https://calib.io/pages/camera-calibration-pattern-generator)
 
-# Teste Cameras
+# Tested Cameras
 * [Dual OV9281](https://www.uctronics.com/arducam-1mp-stereo-camera-for-raspberry-pi-nvidia-jetson-nano-and-xavier-nx-dual-ov9281-monochrome-global-shutter-camera-module.html)
