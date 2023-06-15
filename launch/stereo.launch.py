@@ -13,9 +13,9 @@ def generate_launch_description():
         default_value='arducam'
     )
     
-    device = LaunchConfiguration('device')
-    device_arg = DeclareLaunchArgument(
-        'device',
+    arducam_device = LaunchConfiguration('arducam_device')
+    arducam_device_arg = DeclareLaunchArgument(
+        'arducam_device',
         default_value='0'
     )
 
@@ -73,7 +73,7 @@ def generate_launch_description():
         namespace=namespace,
         output='screen',
         parameters=[
-                        {'device': device}, 
+                        {'device': arducam_device}, 
                         {'frame_id': frame_id},
                         {'width': width},
                         {'height': height},
@@ -87,7 +87,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     ld.add_action(namespace_arg)
-    ld.add_action(device_arg)
+    ld.add_action(arducam_device_arg)
     ld.add_action(width_arg)
     ld.add_action(height_arg)
     ld.add_action(frame_id_arg)
