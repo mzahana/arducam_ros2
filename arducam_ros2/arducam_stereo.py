@@ -26,6 +26,7 @@ SOFTWARE.
 
 
 import rclpy
+from rclpy.qos import qos_profile_sensor_data
 from rclpy.node import Node
 from sensor_msgs.msg import CameraInfo
 import yaml
@@ -97,11 +98,11 @@ class ArduCamNode(Node):
 
         # Publishers
         # CamInfo
-        self._left_cam_info_pub = self.create_publisher(CameraInfo, 'left/camera_info', 10)
-        self._right_cam_info_pub = self.create_publisher(CameraInfo, 'right/camera_info', 10)
+        self._left_cam_info_pub = self.create_publisher(CameraInfo, 'left/camera_info', qos_profile=qos_profile_sensor_data)
+        self._right_cam_info_pub = self.create_publisher(CameraInfo, 'right/camera_info', qos_profile=qos_profile_sensor_data)
         # Images
-        self._left_img_pub = self.create_publisher(Image, 'left/image_raw', 10)
-        self._right_img_pub = self.create_publisher(Image, 'right/image_raw', 10)
+        self._left_img_pub = self.create_publisher(Image, 'left/image_raw', qos_profile=qos_profile_sensor_data)
+        self._right_img_pub = self.create_publisher(Image, 'right/image_raw', qos_profile=qos_profile_sensor_data)
 
         # TODO We need to create a timer for the run() function
         fps = 0.01  # seconds. WARNING. this is limited by the actual camera FPS
