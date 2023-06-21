@@ -43,6 +43,7 @@ from .utils import ArducamUtils
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image, CameraInfo
 # from camera_info_manager import CameraInfoManager # !!! ROS 1 !!!
+import subprocess
 
 class ArduCamNode(Node):
     def __init__(self):
@@ -73,6 +74,9 @@ class ArduCamNode(Node):
         # Set to True if you use monochrome image sensors. Set if RGB
         self.declare_parameter('is_grey', True)
         self._is_grey = self.get_parameter('is_grey').get_parameter_value().bool_value
+
+        self.declare_parameter('exposure', 200)
+        self._exposure = self.get_parameter('exposure').get_parameter_value().integer_value
         
 
         # flags to publish cam info if loaded
@@ -90,6 +94,12 @@ class ArduCamNode(Node):
         # Set device configs
         if not self.setDevice():
             exit(1)
+
+        # This is needed to be able to set exposue
+        ret, frame = self._cap.read()
+        cmd_str = 'v4l2-ctl -d /dev/video{} -c exposure={}'.format(self._device, self._exposure)
+        subprocess.call([cmd_str],shell=True)
+        ret, frame = self._cap.read()
         
         
         # Load camera info from YAML files
