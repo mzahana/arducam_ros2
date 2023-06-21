@@ -196,6 +196,7 @@ class ArduCamNode(Node):
 
     def run(self):
         ret, frame = self._cap.read()
+        capture_time = self.get_clock().now().to_msg()
         if self._arducam_utils.convert2rgb == 0:
             w = self._cap.get(cv2.CAP_PROP_FRAME_WIDTH)
             h = self._cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
@@ -220,7 +221,6 @@ class ArduCamNode(Node):
         right_img_msg = self._cv_bridge.cv2_to_imgmsg(right_img, encoding)
         right_img_msg.header.frame_id = self._frame_id
 
-        capture_time = self.get_clock().now().to_msg()
 
         left_img_msg.header.stamp = capture_time
         right_img_msg.header.stamp = capture_time
