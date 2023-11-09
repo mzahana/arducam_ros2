@@ -62,10 +62,10 @@ class ArduCamNode(Node):
         self.declare_parameter('pixelformat', 'GREY')
         self._pixelformat = self.get_parameter('pixelformat').get_parameter_value().string_value
 
-        self.declare_parameter('width', 1280)
+        self.declare_parameter('width', 2560) # width of 2 images (concatenated horizontally)
         self._width = self.get_parameter('width').get_parameter_value().integer_value
 
-        self.declare_parameter('height', 400)
+        self.declare_parameter('height', 720) # height of each image
         self._height = self.get_parameter('height').get_parameter_value().integer_value
 
         self.declare_parameter('frame_id', 'cam0')
