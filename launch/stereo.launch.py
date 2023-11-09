@@ -22,13 +22,13 @@ def generate_launch_description():
     width = LaunchConfiguration('width')
     width_arg = DeclareLaunchArgument(
         'width',
-        default_value='1280'
+        default_value='2560'
     )
 
     height = LaunchConfiguration('height')
     height_arg = DeclareLaunchArgument(
         'height',
-        default_value='400'
+        default_value='720'
     )
 
     frame_id = LaunchConfiguration('frame_id')
@@ -52,7 +52,7 @@ def generate_launch_description():
     exposure = LaunchConfiguration('exposure')
     exposure_arg = DeclareLaunchArgument(
         'exposure',
-        default_value='200'
+        default_value='2000'
     )
 
     l_file_name = 'left_cam_info.yaml'
