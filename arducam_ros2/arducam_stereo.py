@@ -206,6 +206,8 @@ class ArduCamNode(Node):
 
     def run(self):
         ret, frame = self._cap.read()
+        if not ret:
+            return
         capture_time = self.get_clock().now().to_msg()
         if self._arducam_utils.convert2rgb == 0:
             w = self._cap.get(cv2.CAP_PROP_FRAME_WIDTH)
